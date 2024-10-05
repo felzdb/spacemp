@@ -1,5 +1,14 @@
 import requests
 
+from flask import Blueprint, render_template, redirect
+
+dash_temp_bp = Blueprint("dash_temp_menu", __name__, template_folder="templates")
+
+@dash_temp_bp.route("/dashboard")
+def route_HomePage():
+    return render_template('dash_temp.html')
+
+
 api_weather= '94d84e5dff66fb4d5c74a3b6bb0f8f25'
 city = 'flores da cunha'
 
