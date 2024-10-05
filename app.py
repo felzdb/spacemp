@@ -1,4 +1,6 @@
 from flask import Flask, render_template, blueprints
+from db import engine
+from models import Base
 
 from blueprints.HomePage.HomePage import HomePage_bp
 from blueprints.Login.login import login_bp
