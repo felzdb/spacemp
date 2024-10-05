@@ -1,1 +1,142 @@
-<h1>Só quer mamão, só quer mel?</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Primeira Página</title>
+    <link rel="stylesheet" href="HomePage.css">
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">AGRO ASSETS</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <button class="btnLogin-popup" onclick="location.href='/login'">Login</button>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Olá, Amigo!</h1>
+        <p>Bem vindo ao HOME.</p>
+        <a href="login" class="button">Botão</a>
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 100px;
+        background: black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+    }
+
+    .logo {
+        font-size: 2em;
+        color: #fff;
+        user-select: none;
+    }
+
+    .navigation a {
+        position: relative;
+        font-size: 1.1em;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 40px;
+    }
+
+    .navigation a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background: #fff;
+        border-radius: 5px;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform .5s;
+    }
+
+    .navigation a:hover::after {
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+
+    .navigation .btnLogin-popup {
+        width: 130px;
+        height: 50px;
+        background: transparent;
+        border: 2px solid #fff;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #fff;
+        font-weight: 500;
+        margin-left: 40px;
+        transition: .7s;
+    }
+
+    .navigation .btnLogin-popup:hover {
+        background: #fff;
+        color: #162938
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        color: #000;
+        font-size: 2em;
+    }
+
+    p {
+        color: #6c757d;
+        margin: 10px 0;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #000;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #000;
+    }
+</style>
+
+</html>
