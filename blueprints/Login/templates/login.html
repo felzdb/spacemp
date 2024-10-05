@@ -36,7 +36,7 @@
                     <label><input type="checkbox">Remember me</input></label>
                     <a href="#">Forgot your password?</a>
                 </div>
-                <button type="submit" class="btn" onclick="location.href='/dashboard'">Login</button>
+                <button type="submit" class="btn">Login</button>
                 <div class="login-register">
                     <p>Don´t have a account? <a href="/register" class="register-link">register!</a> </p>
                 </div>
@@ -45,13 +45,13 @@
 
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-        <ul>
+          <ul>
             {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
+              <li class="{{ category }}">{{ message }}</li>
             {% endfor %}
-        </ul>
+          </ul>
         {% endif %}
-        {% endwith %}
+      {% endwith %}
 
     </div>
 
@@ -84,6 +84,9 @@
         opacity: 1;
         /* set the opacity value */
     }
+
+    .error { color: red; }
+    .success { color: green; }
 
     header {
         position: fixed;
