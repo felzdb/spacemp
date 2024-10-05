@@ -3,163 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <title>Weather - Agro Assets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #6190e8, #a7bfe8);
-            height: 100vh;
+            min-height: 100vh;
+            background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start; /* Alinha o card à esquerda */
+            align-items: flex-start; /* Alinha o conteúdo ao topo da página */
+            padding: 50px; /* Adiciona espaço ao redor do conteúdo */
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            background: black;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            color: white;
+            z-index: 99;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: #fff;
+            user-select: none;
+        }
+
+        .navigation a {
+            position: relative;
+            font-size: 1.1em;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .5s;
+        }
+
+        .navigation a:hover::after {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        .navigation .btnLogin-popup {
+            width: 130px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #fff;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: 500;
+            margin-left: 40px;
+            transition: .7s;
+        }
+
+        .navigation .btnLogin-popup:hover {
+            background: #fff;
+            color: #162938
         }
 
         .weather-container {
-            background: rgba(255, 255, 255, 0.1);
+            background-color: white;
+            padding: 40px;
             border-radius: 15px;
-            padding: 20px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            max-width: 90%;
             text-align: center;
+            align-content: auto;
+            margin-top: 50px;
+            align-items: flex-start;
         }
 
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-            font-weight: 300;
-        }
-
-        .place-time {
-            font-size: 1.2em;
-            margin-top: 5px;
-            font-weight: 300;
+        .weather-container h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #333;
         }
 
         .current-weather {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
         }
 
-        .current-weather .temperature {
-            font-size: 6em;
-            font-weight: 100;
-        }
-
-        .current-weather .weather-icon {
+        .current-weather-icon {
             font-size: 4em;
+            margin-bottom: 10px;
+            color: #ffcc00;
         }
 
-        .current-weather .weather-details {
-            text-align: right;
+        .weather-details {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
         }
 
-        .weather-info {
+        .forecast-container {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
 
-        .day {
-            flex: 1;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            margin: 0 10px;
+        .day-forecast {
+            width: 60px;
             text-align: center;
         }
 
-        .day h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .day img {
+        .day-forecast img {
             width: 40px;
             height: 40px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        .day p {
-            font-size: 1.3em;
+        .day-forecast p {
+            font-size: 0.9em;
+            color: #666;
             margin: 0;
-            font-weight: 300;
         }
 
         @media (max-width: 768px) {
+            .weather-container {
+                padding: 20px;
+            }
             .current-weather {
-                flex-direction: column;
-            }
-
-            .current-weather .temperature {
-                font-size: 4em;
-            }
-
-            .current-weather .weather-icon {
                 font-size: 3em;
-                margin-top: 20px;
             }
-
-            .weather-info {
-                flex-direction: column;
+            .current-weather-icon img {
+                background-color: white; /* Adiciona um fundo branco ao ícone */
+                padding: 5px; /* Adiciona algum espaçamento entre o ícone e o fundo */
+                border-radius: 50%; /* Torna o fundo circular, como o ícone */
+                width: 100px; /* Ajuste o tamanho conforme necessário */
+                height: auto;
+             }
+            .day-forecast {
+                width: 50px;
             }
-
-            .day {
-                margin: 10px 0;
+            .day-forecast img {
+                width: 30px;
+                height: 30px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="weather-container">
-        <h1>Sample Text</h1>
-        <div class="place-time">Place - 20:15 PM</div>
 
+    <header>
+        <h2 class="logo">AGRO ASSETS</h2>
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="weather-container">
+        <h2>{{city}}</h2>
         <div class="current-weather">
-            <div class="temperature">33°</div>
-            <div class="weather-icon">🌤️</div>
-            <div class="weather-details">
-                <p>Monday 16°</p>
-                <p>4mph / 67°</p>
-            </div>
+            {{temp}}°C
+        </div>
+        <div class="current-weather-icon">
+            <!-- Exibir o ícone dinamicamente -->
+            <i class="fas {{ icon_class }}"></i>
+        </div>
+        <div class="weather-details">
+            {{clima}}<br>
+            {{day}}, <ion-icon name="chevron-down-sharp"></ion-icon> {{temp_min}}°C / <ion-icon name="chevron-up-sharp"></ion-icon> {{temp_max}}°C
         </div>
 
-        <div class="weather-info">
-            <div class="day">
-                <h3>Tue</h3>
-                <img src="https://img.icons8.com/ios/50/FFFFFF/partly-cloudy-day.png" alt="Weather Icon">
+        <div class="forecast-container">
+            <div class="day-forecast">
+                <img src="https://img.icons8.com/ios/50/000000/sun.png" alt="Sunny">
+                <p>Tue</p>
                 <p>31°</p>
             </div>
-            <div class="day">
-                <h3>Wed</h3>
-                <img src="https://img.icons8.com/ios/50/FFFFFF/cloud.png" alt="Weather Icon">
+            <div class="day-forecast">
+                <img src="https://img.icons8.com/ios/50/000000/cloud.png" alt="Cloudy">
+                <p>Wed</p>
                 <p>30°</p>
             </div>
-            <div class="day">
-                <h3>Thu</h3>
-                <img src="https://img.icons8.com/ios/50/FFFFFF/partly-cloudy-day.png" alt="Weather Icon">
+            <div class="day-forecast">
+                <img src="https://img.icons8.com/ios/50/000000/partly-cloudy-day.png" alt="Partly Cloudy">
+                <p>Thu</p>
                 <p>33°</p>
             </div>
-            <div class="day">
-                <h3>Fri</h3>
-                <img src="https://img.icons8.com/ios/50/FFFFFF/rain.png" alt="Weather Icon">
+            <div class="day-forecast">
+                <img src="https://img.icons8.com/ios/50/000000/rain.png" alt="Rainy">
+                <p>Fri</p>
                 <p>32°</p>
             </div>
-            <div class="day">
-                <h3>Sat</h3>
-                <img src="https://img.icons8.com/ios/50/FFFFFF/cloud.png" alt="Weather Icon">
+            <div class="day-forecast">
+                <img src="https://img.icons8.com/ios/50/000000/cloud.png" alt="Cloudy">
+                <p>Sat</p>
                 <p>33°</p>
-            </div>
-            <div class="day">
-                <h3>Sun</h3>
-                <img src="https://img.icons8.com/ios/50/FFFFFF/cloud.png" alt="Weather Icon">
-                <p>31°</p>
             </div>
         </div>
     </div>
+
 </body>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
