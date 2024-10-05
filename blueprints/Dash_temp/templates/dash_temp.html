@@ -1,1 +1,115 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://source.unsplash.com/1600x900/?weather') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .weather-container {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .current-weather {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 2em;
+        }
+        .current-weather .temp {
+            font-size: 5em;
+        }
+        .current-weather .icon {
+            font-size: 5em;
+        }
+        .forecast {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .day {
+            flex: 1;
+            margin: 0 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .day h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        .day img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Sample Text</h1>
+        <p>Place - 20:15 PM</p>
+
+        <div class="current-weather">
+            <div>
+                <span class="temp">33°</span>
+                <p>Monday 16°</p>
+            </div>
+            <div class="icon">
+                ☀️
+            </div>
+            <div>
+                <p>4mph / 67°</p>
+            </div>
+        </div>
+
+        <div class="forecast">
+            <div class="day">
+                <h3>Tue</h3>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/partly-cloudy-day.png" alt="Weather Icon">
+                <p>31°</p>
+            </div>
+            <div class="day">
+                <h3>Wed</h3>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/cloud.png" alt="Weather Icon">
+                <p>30°</p>
+            </div>
+            <div class="day">
+                <h3>Thu</h3>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/partly-cloudy-day.png" alt="Weather Icon">
+                <p>33°</p>
+            </div>
+            <div class="day">
+                <h3>Fri</h3>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/cloud.png" alt="Weather Icon">
+                <p>32°</p>
+            </div>
+            <div class="day">
+                <h3>Sat</h3>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/rain.png" alt="Weather Icon">
+                <p>33°</p>
+            </div>
+            <div class="day">
+                <h3>Sun</h3>
+                <img src="https://img.icons8.com/ios/50/FFFFFF/cloud.png" alt="Weather Icon">
+                <p>31°</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

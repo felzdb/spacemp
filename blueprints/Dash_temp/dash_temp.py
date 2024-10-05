@@ -1,7 +1,7 @@
 import requests
 
 api_weather= '94d84e5dff66fb4d5c74a3b6bb0f8f25'
-city = 'caxias do sul'
+city = 'flores da cunha'
 
 url_coord = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_weather}"
 
