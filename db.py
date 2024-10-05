@@ -17,5 +17,8 @@ engine = create_engine(connection_string)
 # Configure a base declarativa
 Base = declarative_base()
 
+# Configurando o sessionmaker com o engine
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 # Crie uma fábrica de sessões
 Session = sessionmaker(bind=engine)
