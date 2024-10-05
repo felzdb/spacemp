@@ -1,10 +1,10 @@
 from flask import Flask, render_template, blueprints
 
 
-from blueprints.Menu.menu import main_menu_bp
+from blueprints.Login.login import login_bp
 app = Flask(__name__)
 
-app.register_blueprint(main_menu_bp)
+app.register_blueprint(login_bp)
 
 
 #//URL INVÁLIDA//#
