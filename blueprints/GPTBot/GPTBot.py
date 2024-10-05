@@ -4,8 +4,8 @@ import json
 headers = {
     "Authorization": f"Bearer {""}"
 }
-
-requisicao = requests.get("https://api.openai.com/v1/models", headers=headers)
+link = "a"
+requisicao = requests.get(link, headers=headers)
 
 print(requisicao)
 print(requisicao.text)
