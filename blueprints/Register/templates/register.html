@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">AGRO ASSETS</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <button class="btnLogin-popup" onclick="location.href='/login'">Login</button>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <form action="#" method="post">
+            <h1>Register</h1>
+            <div class="input-box">
+                <div class="input-field">
+                    <input type="text" placeholder="Name" id='Nome_Completo' name="Nome_Completo" required>
+                    <ion-icon name="person-add-outline"></ion-icon>
+                </div>
+                <div class="input-field">
+                    <input type="text" placeholder="Username" id='Nome_Usuario' name="Nome_Usuario" required>
+                    <ion-icon name="person-add-outline"></ion-icon>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <div class="input-field">
+                    <input type="text" placeholder="E-mail" id='User_Email' name="User_Email" required>
+                    <ion-icon name="mail-outline"></ion-icon>
+                </div>
+                <div class="input-field">
+                    <input type="number" placeholder="Phone Number" id='telefone' name="telefone" required>
+                    <ion-icon name="call-outline"></ion-icon>
+                </div>
+            </div>
+            <div class="input-box">
+                <div class="input-field">
+                    <input type="password" placeholder="Password" id='senha' name="senha" required>
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                </div>
+                <div class="input-field">
+                    <input type="password" placeholder="Confirm Password" required>
+                    <ion-icon name="document-lock-outline"></ion-icon>
+                </div>
+            </div>
+            <label><input type="checkbox">I read and accept the politics usage.</input></label>
+            <button type="submit" value="submit" class="btn">Register!</button>
+        </form>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url(register-background.png) no-repeat;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 100px;
+        background: black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+    }
+
+    .logo {
+        font-size: 2em;
+        color: #fff;
+        user-select: none;
+    }
+
+    .navigation a {
+        position: relative;
+        font-size: 1.1em;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 40px;
+    }
+
+    .navigation a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background: #fff;
+        border-radius: 5px;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform .5s;
+    }
+
+    .navigation a:hover::after {
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+
+    .navigation .btnLogin-popup {
+        width: 130px;
+        height: 50px;
+        background: transparent;
+        border: 2px solid #fff;
+        outline: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: #fff;
+        font-weight: 500;
+        margin-left: 40px;
+        transition: .7s;
+    }
+
+    .navigation .btnLogin-popup:hover {
+        background: #fff;
+        color: #162938
+    }
+
+    .wrapper {
+        width: 750px;
+        background: rgba(255, 255, 255, .9);
+        border: 2px solid rgba(255, 255, 255, .2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        border-radius: 10px;
+        color: #162938;
+        padding: 40px 35px 55px;
+    }
+
+    .wrapper h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .wrapper .input-box {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .input-box .input-field {
+        position: relative;
+        width: 48%;
+        height: 50px;
+        margin: 13px 0;
+    }
+
+    .input-box .input-field input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: 2px solid rgba(0, 0, 0, .9);
+        outline: none;
+        font-size: 16px;
+        color: #162938;
+        border-radius: 6px;
+        padding: 15px 15px 15px 40px;
+    }
+
+    .input-box .input-field input::placeholder {
+        color: #162938;
+
+    }
+
+    .input-box .input-field ion-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+    }
+
+    .wrapper label {
+        display: inline-block;
+        font-size: 14.5px;
+        margin: 10px 0 23px;
+    }
+
+    .wrapper label input {
+        accent-color: #162938;
+        margin-right: 5px;
+    }
+
+    .wrapper .btn {
+        width: 100%;
+        height: 45px;
+        background: #162938;
+        border: none;
+        outline: none;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #fff;
+        font-weight: 600;
+    }
+</style>
+
+</html>
