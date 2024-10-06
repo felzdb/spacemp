@@ -8,7 +8,23 @@ login_bp = Blueprint("Login_Menu", __name__, template_folder="templates")
 
 @login_bp.route("/login", methods=['GET', 'POST'])
 def route_login():
+    if request.method == 'POST':
+        # Receber os dados do formulário
+        username = request.form['username']
+        password = request.form['password']
+        
+        print(f"Dados recebidos no formulário: Usuário={username}, Senha={password}")  # Debugging print
+        
+        # Verificar as credenciais (chame sua função de verificação)
+        if verificar_usuario(username, password):
+            return redirect(url_for('dash_temp_menu.route_HomePage'))  # Sucesso: Redirecionar para o dashboard
+        else:
+            flash('Nome de usuário ou senha incorretos', 'error')
+            return redirect(url_for('Login_Menu.route_login'))  # Falha: Redirecionar de volta ao login
+
+    # Caso seja um GET, renderizar a página de login
     return render_template('login.html')
+
 
 # Função para verificar credenciais
 def verificar_usuario(username, password):
@@ -54,15 +70,3 @@ def verificar_usuario(username, password):
     else:
         return False  # Usuário ou senha estão incorretos
     
-def login():
-    username = request.form['username']
-    password = request.form['password']
-
-    print(f"Dados recebidos no formulário: Usuário={username}, Senha={password}")
-
-    # Verificar as credenciais
-    if verificar_usuario(username, password):
-        return redirect(url_for('dashboard'))
-    else:
-        flash('Nome de usuário ou senha incorretos', 'error')
-        return redirect(url_for('login_page'))

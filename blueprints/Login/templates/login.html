@@ -32,6 +32,7 @@
                     <input type="password" id="password" name="password" required>
                     <label>Password</label>
                 </div>
+
                 <div class="remember-forgot">
                     <label><input type="checkbox">Remember me</input></label>
                     <a href="#">Forgot your password?</a>
@@ -40,19 +41,21 @@
                 <div class="login-register">
                     <p>Don´t have a account? <a href="/register" class="register-link">register!</a> </p>
                 </div>
+
+                <div class="error-message">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <ul>
+                            {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+
             </form>
         </div>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          <ul>
-            {% for category, message in messages %}
-              <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
-
     </div>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -85,8 +88,11 @@
         /* set the opacity value */
     }
 
-    .error { color: red; }
-    .success { color: green; }
+    .error-message {
+    margin-top: 15px;  /* Ajuste o espaçamento superior para posicionar a mensagem abaixo do botão */
+    color: red;  /* Cor da mensagem de erro */
+    text-align: center;  /* Centraliza a mensagem de erro */
+    }   
 
     header {
         position: fixed;
