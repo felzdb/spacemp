@@ -11,8 +11,8 @@
     <header>
         <h2 class="logo">AGRO ASSETS</h2>
         <nav class="navigation">
-            <a href="#">Home</a>
-            <a href="#">About</a>
+            <a href="home">Home</a>
+            <a href="about">About</a>
             <a href="#">Services</a>
             <a href="#">Contact</a>
             <button class="btnLogin-popup" onclick="location.href='/login'">Login</button>
@@ -20,14 +20,14 @@
     </header>
     <div class="wrapper">
         <form action="/register" method="post">
-            <h1>Registro de Novo Usuário</h1>
+            <h1>New users!</h1>
             <div class="input-box">
                 <div class="input-field">
-                    <input type="text" placeholder="Nome" id='nome_completo' name="nome_completo" required>
+                    <input type="text" placeholder="Full Name" id='nome_completo' name="nome_completo" required>
                     <ion-icon name="person-add-outline"></ion-icon>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Usuario" id='nome_usuario' name="nome_usuario" required>
+                    <input type="text" placeholder="User" id='nome_usuario' name="nome_usuario" required>
                     <ion-icon name="person-add-outline"></ion-icon>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <ion-icon name="mail-outline"></ion-icon>
                 </div>
                 <div class="input-field">
-                    <input type="number" placeholder="Telefone" id='telefone' name="telefone" required>
+                    <input type="number" placeholder="Phone Number" id='telefone' name="telefone" required>
                     <ion-icon name="call-outline"></ion-icon>
                 </div>
             </div>
@@ -48,12 +48,12 @@
                     <ion-icon name="lock-closed-outline"></ion-icon>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Cidade" id='' name="region" required>
+                    <input type="text" placeholder="City" id='' name="region" required>
                     <ion-icon name="storefront-outline"></ion-icon>
                 </div>
             </div>
-            <label><input type="checkbox">Eu li e concordo com os termos de uso.</input></label>
-            <button type="submit" value="submit" class="btn">Registrar</button>
+            <label><input type="checkbox">I have read and agreed with terms of use..</input></label>
+            <button type="submit" value="submit" class="btn">Register</button>
         </form>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

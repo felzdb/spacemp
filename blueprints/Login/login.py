@@ -75,7 +75,7 @@ def verificar_usuario(username, password):
     df_airtable = pd.DataFrame(rows)
 
     # Verificar se o usuário e a senha correspondem a algum registro
-    user_row = df_airtable[(df_airtable['Name'] == username) & (df_airtable['Password'] == password)]
+    user_row = df_airtable[(df_airtable['User_name'] == username) & (df_airtable['Password'] == password)]
 
     if not user_row.empty:
         return True  # Usuário e senha estão corretos
