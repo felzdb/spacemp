@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from sqlalchemy.orm import Session
 import pandas as pd
 import requests
@@ -15,8 +15,21 @@ def route_login():
         
         print(f"Dados recebidos no formulário: Usuário={username}, Senha={password}")  # Debugging print
         
-        # Verificar as credenciais (chame sua função de verificação)
         if verificar_usuario(username, password):
+            # Buscar a região associada ao usuário no Airtable ou banco de dados
+            region = buscar_regiao_do_usuario(username)
+            
+            print(region)
+
+            if region:
+                # Armazenar a região na sessão do Flask
+                session['region'] = region
+                print(f"Região armazenada na sessão: {session['region']}")
+            else:
+                flash('Erro ao buscar a região do usuário.', 'error')
+                return redirect(url_for('Login_Menu.route_login'))  # Voltar ao login em caso de falha
+            
+
             return redirect(url_for('dash_temp_menu.route_HomePage'))  # Sucesso: Redirecionar para o dashboard
         else:
             flash('Nome de usuário ou senha incorretos', 'error')
@@ -69,4 +82,23 @@ def verificar_usuario(username, password):
         return True  # Usuário e senha estão corretos
     else:
         return False  # Usuário ou senha estão incorretos
+    
+def buscar_regiao_do_usuario(username):
+    pat = 'patqTjSfqmO03jEDd.4330e2c445694f5b08b9223c4c869eb4b19c1c903dd58ff8b409aefd3dabe73a'
+    base_id = 'appAjKZG2ceyIn0FU'
+    table_name = 'tbluUrT38tFYLVEBQ'
+    airtable_url = f'https://api.airtable.com/v0/{base_id}/{table_name}'
+    headers = {
+        'Authorization': f'Bearer {pat}',
+        'Content-Type': 'application/json'
+    }
+    
+    response = requests.get(airtable_url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        for record in data['records']:
+            fields = record['fields']
+            if fields.get('Name') == username:
+                return fields.get('Region')  # Retorna a região associada ao usuário
+    return None
     

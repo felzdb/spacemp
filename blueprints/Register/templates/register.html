@@ -20,14 +20,14 @@
     </header>
     <div class="wrapper">
         <form action="/register" method="post">
-            <h1>Register</h1>
+            <h1>Registro de Novo Usuário</h1>
             <div class="input-box">
                 <div class="input-field">
-                    <input type="text" placeholder="Name" id='nome_completo' name="nome_completo" required>
+                    <input type="text" placeholder="Nome" id='nome_completo' name="nome_completo" required>
                     <ion-icon name="person-add-outline"></ion-icon>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Username" id='nome_usuario' name="nome_usuario" required>
+                    <input type="text" placeholder="Usuario" id='nome_usuario' name="nome_usuario" required>
                     <ion-icon name="person-add-outline"></ion-icon>
                 </div>
             </div>
@@ -38,18 +38,22 @@
                     <ion-icon name="mail-outline"></ion-icon>
                 </div>
                 <div class="input-field">
-                    <input type="number" placeholder="Phone Number" id='telefone' name="telefone" required>
+                    <input type="number" placeholder="Telefone" id='telefone' name="telefone" required>
                     <ion-icon name="call-outline"></ion-icon>
                 </div>
             </div>
             <div class="input-box">
                 <div class="input-field">
-                    <input type="password" placeholder="senha" id='' name="senha" required>
+                    <input type="password" placeholder="Senha" id='' name="senha" required>
                     <ion-icon name="lock-closed-outline"></ion-icon>
                 </div>
+                <div class="input-field">
+                    <input type="text" placeholder="Cidade" id='' name="region" required>
+                    <ion-icon name="storefront-outline"></ion-icon>
+                </div>
             </div>
-            <label><input type="checkbox">I read and accept the politics usage.</input></label>
-            <button type="submit" value="submit" class="btn">Register!</button>
+            <label><input type="checkbox">Eu li e concordo com os termos de uso.</input></label>
+            <button type="submit" value="submit" class="btn">Registrar</button>
         </form>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
