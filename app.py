@@ -7,7 +7,6 @@ from blueprints.HomePage.HomePage import HomePage_bp
 from blueprints.Register.register import register_bp
 from blueprints.Dash_temp.dash_temp import dash_temp_bp
 from blueprints.SpaceWeather.space_weather import space_weather_bp
-from blueprints.EarthAPI.earth_api import earth_api_bp
 from blueprints.GPTBot.GPTBot import chatbot_bp
 
 
@@ -19,7 +18,6 @@ app.register_blueprint(register_bp)
 app.register_blueprint(dash_temp_bp)
 app.register_blueprint(HomePage_bp)
 app.register_blueprint(space_weather_bp)
-app.register_blueprint(earth_api_bp)
 app.register_blueprint(chatbot_bp)
 
 @app.route("/")

@@ -168,6 +168,20 @@
             color: black;
         }
 
+        .additional-info {
+            background-color: #222;
+            color: #cacaca;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 1em;
+        }
+
+        .additional-info .info-item {
+            margin: 10px 0;
+        }
+
     </style>
 </head>
 <body>
@@ -184,7 +198,7 @@
     <div id="map"></div>
 
     <div class="layer-controls">
-        <button id="defaultLayerBtn" class="active">Default Layer</button>
+        <button id="defaultLayerBtn" class="active">Default</button>
         <button id="pressureLayerBtn">Pressure</button>
         <button id="tempLayerBtn">Temperature</button>
         <button id="cloudLayerBtn">Clouds</button>
@@ -203,6 +217,14 @@
             {{clima}}<br>
             {{day}} , <ion-icon name="chevron-down-sharp"></ion-icon>{{temp_min}}°C / <ion-icon name="chevron-up-sharp"></ion-icon>{{temp_max}}°C
         </div>
+
+        <!-- Novo bloco para informações adicionais -->
+        <div class="additional-info">
+            <div class="info-item">Wind Speed: {{wind_speed}} m/s</div>
+            <div class="info-item">Pressure: {{pressure}} hPa</div>
+            <div class="info-item">Humidity: {{humidity}}%</div>
+        </div>
+    </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

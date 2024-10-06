@@ -23,7 +23,7 @@ def get_weather_data(city):
             lon = data[0]['lon']
 
             # Construir URL para obter o clima atual baseado nas coordenadas
-            url_current = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_weather}&lang=pt_br"
+            url_current = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_weather}"
             response_current = requests.get(url_current)
 
             if response_current.status_code == 200:
@@ -50,10 +50,11 @@ def route_HomePage():
             lat = weather_data['coord']['lat']
             lon = weather_data['coord']['lon']
             temp = weather_data['main']['temp']
-            umidade = weather_data['main']['humidity']
-            vento = weather_data['wind']['speed']
+            humidity = weather_data['main']['humidity']
+            wind_speed = weather_data['wind']['speed']
             temp_min = weather_data['main']['temp_min']
             temp_max = weather_data['main']['temp_max']
+            pressure = weather_data['main']['pressure']
             clima = weather_data['weather'][0]['description'].title()
             date_time = datetime.datetime.utcfromtimestamp(weather_data['dt'])
             day_of_week = date_time.strftime('%A')
@@ -73,7 +74,10 @@ def route_HomePage():
                 day=day_of_week, 
                 icon=icon_code,
                 lat=lat,
-                lon=lon
+                lon=lon,
+                humidity = humidity,
+                wind_speed = wind_speed,
+                pressure = pressure
             )
         else:
             flash("Erro ao buscar os dados climáticos. Por favor, tente novamente.", "error")
