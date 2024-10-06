@@ -47,6 +47,8 @@ def route_HomePage():
 
         if weather_data:
             # Extrair os dados relevantes
+            lat = weather_data['coord']['lat']
+            lon = weather_data['coord']['lon']
             temp = weather_data['main']['temp']
             umidade = weather_data['main']['humidity']
             vento = weather_data['wind']['speed']
@@ -57,6 +59,9 @@ def route_HomePage():
             day_of_week = date_time.strftime('%A')
             icon_code = weather_data['weather'][0]['icon']
 
+            print(lat)
+            print(lon)
+
             # Renderizar a página com os dados do clima
             return render_template(
                 'dash_temp.html', 
@@ -66,7 +71,9 @@ def route_HomePage():
                 temp_min=temp_min, 
                 temp_max=temp_max, 
                 day=day_of_week, 
-                icon=icon_code
+                icon=icon_code,
+                lat=lat,
+                lon=lon
             )
         else:
             flash("Erro ao buscar os dados climáticos. Por favor, tente novamente.", "error")
@@ -74,3 +81,5 @@ def route_HomePage():
     else:
         flash("Nenhuma região selecionada. Por favor, faça o login novamente.", "error")
         return redirect(url_for('Login_Menu.route_login'))
+
+print

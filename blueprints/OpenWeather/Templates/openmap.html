@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Interativo com OpenWeather</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
@@ -17,18 +16,81 @@
             background-color: #f4f4f4;
         }
 
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            background: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: #fff;
+            user-select: none;
+        }
+
+        .navigation a {
+            position: relative;
+            font-size: 1.1em;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .5s;
+        }
+
+        .navigation a:hover::after {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        .navigation .btnLogin-popup {
+            width: 130px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #fff;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: 500;
+            margin-left: 40px;
+            transition: .7s;
+        }
+
+        .navigation .btnLogin-popup:hover {
+            background: #fff;
+            color: #162938
+        }
+
         h1 {
             margin: 20px 0;
             color: #333;
         }
 
         #map {
-            width: 100%;
-            height: 80vh;
-            /* Usando altura percentual para responsividade */
-            max-height: 600px;
-            /* Altura máxima para dispositivos maiores */
-            margin-bottom: 20px;
+ 
+            height: 300vh;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
@@ -73,12 +135,17 @@
     </style>
 </head>
 
+<header>
+    <h2 class="logo">AGRO ASSETS</h2>
+    <nav class="navigation">
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
 <body>
-    <h1>Mapa Interativo com OpenWeather</h1>
-    <div class="search-container">
-        <input type="text" id="cityInput" placeholder="Digite uma cidade">
-        <button id="searchButton">Buscar Clima</button>
-    </div>
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>

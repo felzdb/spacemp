@@ -5,7 +5,7 @@ api_weather= '94d84e5dff66fb4d5c74a3b6bb0f8f25'
 lat = -29.03
 lon = -51.18
 
-url_current = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=metric&appid={api_weather}&lang=pt_br"
+url_current = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={api_weather}&lang=pt_br"
 
 # Fazendo a requisição para a API
 response = requests.get(url_current)
