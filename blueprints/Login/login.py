@@ -25,13 +25,13 @@ def route_login():
                 session['region'] = region
                 print(f"Região armazenada na sessão: {session['region']}")
             else:
-                flash('Erro ao buscar a região do usuário.', 'error')
+                flash('Problem in User Location', 'error')
                 return redirect(url_for('Login_Menu.route_login'))  # Voltar ao login em caso de falha
             
 
             return redirect(url_for('dash_temp_menu.route_HomePage'))  # Sucesso: Redirecionar para o dashboard
         else:
-            flash('Nome de usuário ou senha incorretos', 'error')
+            flash('Incorrect User or Password', 'error')
             return redirect(url_for('Login_Menu.route_login'))  # Falha: Redirecionar de volta ao login
 
     # Caso seja um GET, renderizar a página de login
@@ -97,7 +97,7 @@ def buscar_regiao_do_usuario(username):
         data = response.json()
         for record in data['records']:
             fields = record['fields']
-            if fields.get('Name') == username:
+            if fields.get('User_name') == username:
                 return fields.get('Region')  # Retorna a região associada ao usuário
     return None
     
