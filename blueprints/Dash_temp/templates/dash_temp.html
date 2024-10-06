@@ -80,19 +80,6 @@
             margin-bottom: 20px;
         }
 
-        header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px 100px;
-        background: black;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 99;
-        }
-
         .logo {
             font-size: 2em;
             color: #fff;
@@ -146,6 +133,41 @@
             background: #fff;
             color: #162938
         }
+
+        .layer-controls {
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            background-color: #000000;
+            border-radius: 15px;
+            padding: 10px 20px;
+        }
+
+        .layer-controls button {
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            background-color: #000000;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .layer-controls button:hover {
+            background-color: #9e9e9e;
+            color: black;
+        }
+
+        .layer-controls button.active {
+            background-color: #ffffff;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
@@ -161,13 +183,20 @@
 
     <div id="map"></div>
 
+    <div class="layer-controls">
+        <button id="defaultLayerBtn" class="active">Default Layer</button>
+        <button id="pressureLayerBtn">Pressure</button>
+        <button id="tempLayerBtn">Temperature</button>
+        <button id="cloudLayerBtn">Clouds</button>
+        <button id="windLayerBtn">Wind</button>
+    </div>
+
     <div class="weather-container">
         <h2>{{city}}</h2>
         <div class="current-weather">
             {{temp}}°C
         </div>
         <div class="current-weather-icon">
-            <!-- Exibir o ícone dinamicamente -->
             <img src="https://openweathermap.org/img/wn/{{icon}}@2x.png" alt="Weather Icon">
         </div>
         <div class="weather-details">
@@ -178,17 +207,76 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        var apiKey = '94d84e5dff66fb4d5c74a3b6bb0f8f25'; // Substitua pela sua chave de API do OpenWeatherMap
+
+        // Inicializa o mapa
         var map = L.map('map').setView([{{ lat }}, {{ lon }}], 13);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        // Camada base do OpenStreetMap
+        var baseLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(map);
 
-        // Garantir que o mapa seja renderizado corretamente ao redimensionar a janela
-        window.addEventListener('resize', function () {
-            setTimeout(function () {
-                map.invalidateSize();
-            }, 400);
+        // Camada de pressão
+        var pressureLayer = L.tileLayer(`https://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+            opacity: 0.5
+        });
+
+        // Camada de vento
+        var windLayer = L.tileLayer(`https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+            opacity: 0.5
+        });
+
+        // Camada de temperatura
+        var tempLayer = L.tileLayer(`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+            opacity: 0.5
+        });
+
+        // Camada de nuvens
+        var cloudLayer = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+            opacity: 0.5
+        });
+
+        // Função para alternar entre as camadas de sobreposição
+        function switchLayer(newLayer, activeButton) {
+            // Remover todas as camadas de sobreposição
+            map.eachLayer(function (layer) {
+                if (layer !== baseLayer) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            // Adicionar a nova camada de sobreposição
+            if (newLayer) {
+                newLayer.addTo(map);
+            }
+
+            // Atualizar a aparência dos botões
+            document.querySelectorAll('.layer-controls button').forEach(button => {
+                button.classList.remove('active');
+            });
+            activeButton.classList.add('active');
+        }
+
+        // Adicionar eventos de clique para os botões
+        document.getElementById('defaultLayerBtn').addEventListener('click', function () {
+            switchLayer(null, this);  // Voltar para o mapa base sem sobreposição
+        });
+
+        document.getElementById('pressureLayerBtn').addEventListener('click', function () {
+            switchLayer(pressureLayer, this);
+        });
+
+        document.getElementById('tempLayerBtn').addEventListener('click', function () {
+            switchLayer(tempLayer, this);
+        });
+
+        document.getElementById('cloudLayerBtn').addEventListener('click', function () {
+            switchLayer(cloudLayer, this);
+        });
+
+        document.getElementById('windLayerBtn').addEventListener('click', function () {
+            switchLayer(windLayer, this);
         });
     </script>
 </body>
