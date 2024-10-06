@@ -1,13 +1,25 @@
+import google.generativeai as genai
+import os
+from flask import Blueprint, jsonify, render_template, request
 import requests
-import json
 
-headers = {
-    "Authorization": "Bearer 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"
-}
-link = "https://api.openai.com/v1/models"
-requisicao = requests.get(link, headers=headers)
 
-print(requisicao)
-print(requisicao.text)
 
-id_modelo = "gpt-3.5-turbo"
+chatbot_bp = Blueprint('chatbot_api', __name__, template_folder='Templates')
+@chatbot_bp.route("/chatbot", methods=['GET', 'POST'])
+def route_chatbot():
+    if request.method == 'POST':
+        chat = request.form['prompt']
+        mensagens_user = chat
+        mensagens_bot = GPT_Generate(chat)
+        return render_template("chatbot.html", mensagens_bot=mensagens_bot, mensagens_user=mensagens_user)
+    else:
+        return render_template("chatbot.html")
+
+
+def GPT_Generate(prompt):
+    genai.configure(api_key="AIzaSyCOS8abrrK3XqAeGwYXcjlWwxODjp2Hhu0")
+
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
+    return response.text
