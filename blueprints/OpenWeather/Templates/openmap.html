@@ -25,7 +25,7 @@
         }).addTo(map);
 
         // Exemplo de chamada à API para obter o clima em Brasília
-        fetch('/weather/Brasília')
+        fetch('/weather/{city}')
             .then(response => response.json())
             .then(data => {
                 var marker = L.marker([data.coord.lat, data.coord.lon]).addTo(map);

@@ -193,39 +193,11 @@
         </div>
         <div class="current-weather-icon">
             <!-- Exibir o ícone dinamicamente -->
-            <i class="fas {{ icon_class }}"></i>
+            <img src="https://openweathermap.org/img/wn/{{icon}}@2x.png" alt="Weather Icon">
         </div>
         <div class="weather-details">
             {{clima}}<br>
             {{day}} , <ion-icon name="chevron-down-sharp"></ion-icon>{{temp_min}}°C / <ion-icon name="chevron-up-sharp"></ion-icon>{{temp_max}}°C
-        </div>
-
-        <div class="forecast-container">
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/sun.png" alt="Sunny">
-                <p>Tue</p>
-                <p>31°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/cloud.png" alt="Cloudy">
-                <p>Wed</p>
-                <p>30°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/partly-cloudy-day.png" alt="Partly Cloudy">
-                <p>Thu</p>
-                <p>33°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/rain.png" alt="Rainy">
-                <p>Fri</p>
-                <p>32°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/cloud.png" alt="Cloudy">
-                <p>Sat</p>
-                <p>33°</p>
-            </div>
         </div>
     </div>
 

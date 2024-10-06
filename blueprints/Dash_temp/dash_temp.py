@@ -55,23 +55,7 @@ def route_HomePage():
             clima = weather_data['weather'][0]['description'].title()
             date_time = datetime.datetime.utcfromtimestamp(weather_data['dt'])
             day_of_week = date_time.strftime('%A')
-            icon_code = weather_data['weather'][0]['main']
-
-            # Mapeamento de 'main' para ícones de Font Awesome
-            weather_icon_mapping = {
-                'Clear': 'fa-sun',
-                'Clouds': 'fa-cloud',
-                'Rain': 'fa-cloud-showers-heavy',
-                'Drizzle': 'fa-cloud-rain',
-                'Thunderstorm': 'fa-bolt',
-                'Snow': 'fa-snowflake',
-                'Mist': 'fa-smog',
-                'Fog': 'fa-smog',
-                'Haze': 'fa-smog'
-            }
-
-            # Buscar o ícone correspondente
-            icon_class = weather_icon_mapping.get(icon_code, 'fa-question')
+            icon_code = weather_data['weather'][0]['icon']
 
             # Renderizar a página com os dados do clima
             return render_template(
@@ -82,7 +66,7 @@ def route_HomePage():
                 temp_min=temp_min, 
                 temp_max=temp_max, 
                 day=day_of_week, 
-                icon=icon_class
+                icon=icon_code
             )
         else:
             flash("Erro ao buscar os dados climáticos. Por favor, tente novamente.", "error")
