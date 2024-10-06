@@ -8,6 +8,7 @@ from blueprints.Register.register import register_bp
 from blueprints.Dash_temp.dash_temp import dash_temp_bp
 from blueprints.SpaceWeather.space_weather import space_weather_bp
 from blueprints.GPTBot.GPTBot import chatbot_bp
+from blueprints.About.about import about_bp
 
 
 app = Flask(__name__)
@@ -19,6 +20,7 @@ app.register_blueprint(dash_temp_bp)
 app.register_blueprint(HomePage_bp)
 app.register_blueprint(space_weather_bp)
 app.register_blueprint(chatbot_bp)
+app.register_blueprint(about_bp)
 
 @app.route("/")
 def route_HomePage():
