@@ -1,6 +1,10 @@
 import requests
 import datetime
-from flask import Blueprint, render_template, redirect, session, flash, url_for
+from flask import Blueprint, render_template, redirect, session, flash, url_for, request
+import google.generativeai as genai
+import os
+from flask import Blueprint, jsonify, render_template, request
+import requests
 
 dash_temp_bp = Blueprint("dash_temp_menu", __name__, template_folder="templates")
 
@@ -11,12 +15,11 @@ def get_weather_data(city):
     # Construir URL para coordenadas da cidade
     url_coord = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_weather}"
     
-    # Fazer a requisição à API
     response = requests.get(url_coord)
-    
+        
     if response.status_code == 200:
         data = response.json()
-        
+            
         if data:
             # Obter latitude e longitude
             lat = data[0]['lat']
@@ -36,11 +39,19 @@ def get_weather_data(city):
     else:
         return None  # Erro ao obter coordenadas
 
-@dash_temp_bp.route("/dashboard")
+
+
+def GPT_Generate(prompt):
+    genai.configure(api_key="AIzaSyCOS8abrrK3XqAeGwYXcjlWwxODjp2Hhu0")
+
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
+    return response.text
+
+@dash_temp_bp.route("/dashboard", methods=['GET', 'POST'])
 def route_HomePage():
-    # Pegar a cidade da sessão
     city = session.get('region')
-    
+        
     if city:
         # Obter os dados de clima para a cidade
         weather_data = get_weather_data(city)
@@ -63,8 +74,34 @@ def route_HomePage():
             print(lat)
             print(lon)
 
-            # Renderizar a página com os dados do clima
-            return render_template(
+
+    if request.method == "POST":
+
+        chat = request.form['prompt']
+        mensagens_user = chat
+        mensagens_bot = GPT_Generate(chat)
+        return render_template(
+                    'dash_temp.html', 
+                    city=city, 
+                    temp=temp, 
+                    clima=clima, 
+                    temp_min=temp_min, 
+                    temp_max=temp_max, 
+                    day=day_of_week, 
+                    icon=icon_code,
+                    lat=lat,
+                    lon=lon,
+                    humidity = humidity,
+                    wind_speed = wind_speed,
+                    pressure = pressure,
+                    mensagens_bot=mensagens_bot, 
+                    mensagens_user=mensagens_user
+                )
+    
+
+    # Renderizar a página com os dados do clima
+    else:
+        return render_template(
                 'dash_temp.html', 
                 city=city, 
                 temp=temp, 
@@ -79,11 +116,5 @@ def route_HomePage():
                 wind_speed = wind_speed,
                 pressure = pressure
             )
-        else:
-            flash("Erro ao buscar os dados climáticos. Por favor, tente novamente.", "error")
-            return redirect(url_for('route_HomePage'))
-    else:
-        flash("Nenhuma região selecionada. Por favor, faça o login novamente.", "error")
-        return redirect(url_for('Login_Menu.route_login'))
 
 print
