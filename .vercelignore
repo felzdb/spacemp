@@ -1,0 +1,11 @@
+# Ignore arquivos temporários e de cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore dependências de desenvolvimento
+
+# Ignore pastas desnecessárias
+tests/
+docs/
+virt/
