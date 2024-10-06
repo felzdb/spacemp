@@ -39,16 +39,6 @@
             maxZoom: 19,
         }).addTo(map);
 
-<<<<<<< Updated upstream
-        // Exemplo de chamada à API para obter o clima em Brasília
-        fetch('/weather/{city}')
-            .then(response => response.json())
-            .then(data => {
-                var marker = L.marker([data.coord.lat, data.coord.lon]).addTo(map);
-                marker.bindPopup(`<b>${data.name}</b><br>${data.weather[0].description}.`);
-                marker.openPopup();
-            });
-=======
         function addMarker(city, lat, lon, weather) {
             var marker = L.marker([lat, lon]).addTo(map);
             marker.bindPopup(`<b>${city}</b><br>${weather.description}.`);
@@ -78,7 +68,6 @@
                     alert(error.message);
                 });
         });
->>>>>>> Stashed changes
     </script>
 </body>
 
