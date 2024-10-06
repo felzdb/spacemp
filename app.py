@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pandas as pd
-import requests
-
+#import requests
 
 from blueprints.Login.login import login_bp
 from blueprints.HomePage.HomePage import HomePage_bp
@@ -9,9 +8,7 @@ from blueprints.Register.register import register_bp
 from blueprints.Dash_temp.dash_temp import dash_temp_bp
 from blueprints.SpaceWeather.space_weather import space_weather_bp
 from blueprints.EarthAPI.earth_api import earth_api_bp
-from blueprints.EarthMap.earth_map import earth_map_bp
-from blueprints.OpenWeather.openweather import openweather_bp
-
+from blueprints.GPTBot.GPTBot import chatbot_bp
 
 
 app = Flask(__name__)
@@ -23,8 +20,7 @@ app.register_blueprint(dash_temp_bp)
 app.register_blueprint(HomePage_bp)
 app.register_blueprint(space_weather_bp)
 app.register_blueprint(earth_api_bp)
-app.register_blueprint(earth_map_bp)
-app.register_blueprint(openweather_bp)
+app.register_blueprint(chatbot_bp)
 
 @app.route("/")
 def route_HomePage():
