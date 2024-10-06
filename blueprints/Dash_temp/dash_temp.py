@@ -101,6 +101,8 @@ def route_HomePage():
 
     # Renderizar a página com os dados do clima
     else:
+        
+        mensagens_bot = GPT_Generate(f'levando em contas essas informacoes: velocidade do vento {wind_speed} m/s pressão do ar: {pressure} hpa umidade: {humidity}%, em no maixmo 100 caracteres me diga as acoes que possam ser feitas na minha plantação cite os dados para melhor UX EM INGLÊS!')
         return render_template(
                 'dash_temp.html', 
                 city=city, 
@@ -114,7 +116,8 @@ def route_HomePage():
                 lon=lon,
                 humidity = humidity,
                 wind_speed = wind_speed,
-                pressure = pressure
+                pressure = pressure,
+                mensagens_bot=mensagens_bot
             )
 
 print

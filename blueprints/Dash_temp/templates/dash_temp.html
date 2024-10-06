@@ -202,62 +202,67 @@
         body {
         font-family: Arial, sans-serif;
         background-color: #f0f0f0;
-    }
+        }
 
-    .chat-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 400px;
-        background-color: #fff;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1;
-        /* add this to ensure the chat container is on top of other elements */
-    }
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            /* add this to ensure the chat container is on top of other elements */
+        }
 
-    .chat-header {
-        background-color: #333;
-        text-align: center;
-        color: #fff;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
+        .chat-header {
+            background-color: #000000;
+            text-align: center;
+            border-radius: 15px;
+            color: #fff;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
 
-    .chat-body {
-        padding: 20px;
-    }
+        .chat-body {
+            padding: 20px;
+            margin: 20px;
+        }
 
-    #chat-log {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
+        #chat-log {
+            padding: 10px;
+            border: 1px hidden #ddd;
+        }
 
-    #chat-form {
-        padding: 10px;
-    }
+        #chat-form {
+            padding: 10px;
+            border-radius: 15px;
+        }
 
-    #chat-input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        #chat-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    #chat-submit {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        #chat-submit {
+            background-color: #000000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding-top: 3%;
+            margin-top: 5%;
+        }
 
-    #chat-submit:hover {
-        background-color: #444;
-    }
+        #chat-submit:hover {
+            background-color: #444;
+        }
 
     </style>
 </head>
@@ -310,10 +315,6 @@
         </div>
         <div class="chat-body">
             <div id="chat-log">
-                <ul>
-                    <p><strong>User: </strong></p>
-                    <li>{{ mensagens_user }}</li>
-                </ul>
                 <ul>
                     <p><strong>AgroAssets Agent: </strong></p>
                     <textarea readonly id="chat-log" cols="30" rows="10">{{ mensagens_bot }}</textarea>
