@@ -181,6 +181,65 @@
         .additional-info .info-item {
             margin: 10px 0;
         }
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    .chat-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 400px;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        /* add this to ensure the chat container is on top of other elements */
+    }
+
+    .chat-header {
+        background-color: #333;
+        text-align: center;
+        color: #fff;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .chat-body {
+        padding: 20px;
+    }
+
+    #chat-log {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #chat-form {
+        padding: 10px;
+    }
+
+    #chat-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #chat-submit {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #chat-submit:hover {
+        background-color: #444;
+    }
 
     </style>
 </head>
@@ -192,6 +251,7 @@
             <a href="about">About</a>
             <a href="#">Services</a>
             <a href="#">Contact</a>
+            <a href="/chatbot">VirtualAgent</a>
         </nav>
     </header>
 
@@ -204,6 +264,7 @@
         <button id="cloudLayerBtn">Clouds</button>
         <button id="windLayerBtn">Wind</button>
     </div>
+
 
     <div class="weather-container">
         <h2>{{city}}</h2>
@@ -225,6 +286,27 @@
             <div class="info-item">Humidity: {{humidity}}%</div>
         </div>
     </div>
+    </div>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>AgroAssets ChatBot</h1>
+        </div>
+        <div class="chat-body">
+            <div id="chat-log">
+                <ul>
+                    <p><strong>User: </strong></p>
+                    <li>{{ mensagens_user }}</li>
+                </ul>
+                <ul>
+                    <p><strong>AgroAssets Agent: </strong></p>
+                    <textarea readonly id="chat-log" cols="30" rows="10">{{ mensagens_bot }}</textarea>
+                </ul>
+            </div>
+            <form id="chat-form" method="post">
+                <input type="text" id="chat-input" placeholder="Type a message..." name="prompt">
+                <button id="chat-submit">Send</button>
+            </form>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
