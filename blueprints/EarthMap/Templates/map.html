@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo da NASA</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #0056b3;
+        }
+
+        #map {
+            height: 80vh;
+            width: 100%;
+            border: 2px solid #0056b3;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+        }
+
+        .city-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Mapa Interativo da NASA</h1>
+    <div class="city-buttons">
+        <button onclick="highlightCity('São Paulo')">São Paulo</button>
+        <button onclick="highlightCity('Rio de Janeiro')">Rio de Janeiro</button>
+        <button onclick="highlightCity('Nova York')">Nova York</button>
+        <button onclick="resetCities()">Limpar Destaques</button>
+        <button onclick="toggleSoilLayer()">Toggle Solo</button>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([-23.5505, -46.6333], 5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Definindo as cidades e suas coordenadas
+        const cityData = {
+            "São Paulo": { lat: -23.5505, lon: -46.6333 },
+            "Rio de Janeiro": { lat: -22.9068, lon: -43.1729 },
+            "Nova York": { lat: 40.7128, lon: -74.0060 },
+        };
+
+        // Armazenando as camadas de círculos
+        const cityCircles = {};
+        for (const city in cityData) {
+            const { lat, lon } = cityData[city];
+            cityCircles[city] = L.circle([lat, lon], {
+                color: 'blue',
+                fillColor: '#30f',
+                fillOpacity: 0.5,
+                radius: 30000 // Ajuste o raio conforme necessário
+            }).addTo(map).bindPopup(city);
+        }
+
+        // Camada de solo
+        let soilLayer;
+
+        async function loadSoilLayer() {
+            const response = await fetch('URL_DOS_DADOS_DE_SOLO.geojson'); // Substitua pela URL correta
+            const data = await response.json();
+
+            soilLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    return { color: getSoilColor(feature.properties.type) }; // Defina a cor com base no tipo de solo
+                }
+            }).addTo(map);
+        }
+
+        function getSoilColor(type) {
+            // Defina cores diferentes para tipos de solo
+            switch (type) {
+                case 'Argiloso': return '#8B4513'; // Marrom
+                case 'Arenoso': return '#D2B48C'; // Bege
+                case 'Siltoso': return '#A0522D'; // Sienna
+                default: return '#228B22'; // Verde
+            }
+        }
+
+        function highlightCity(city) {
+            for (const c in cityCircles) {
+                cityCircles[c].setStyle({
+                    color: c === city ? 'red' : 'blue',
+                    fillColor: c === city ? '#f00' : '#30f'
+                });
+            }
+        }
+
+        function resetCities() {
+            for (const c in cityCircles) {
+                cityCircles[c].setStyle({
+                    color: 'blue',
+                    fillColor: '#30f'
+                });
+            }
+        }
+
+        function toggleSoilLayer() {
+            if (map.hasLayer(soilLayer)) {
+                map.removeLayer(soilLayer);
+            } else {
+                map.addLayer(soilLayer);
+            }
+        }
+
+        loadSoilLayer(); // Carregar camada de solo
+    </script>
+</body>
+
+</html>

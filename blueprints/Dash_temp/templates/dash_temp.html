@@ -91,7 +91,7 @@
         }
 
         .weather-container {
-            background-color: white;
+            background-color: black;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -106,24 +106,19 @@
         .weather-container h2 {
             margin-bottom: 30px;
             font-size: 2em;
-            color: #333;
+            color: #ffffff;
         }
 
         .current-weather {
             font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .current-weather-icon {
-            font-size: 4em;
-            margin-bottom: 10px;
-            color: #ffcc00;
+            margin-bottom: 5px;
+            color: #cacaca;
         }
 
         .weather-details {
             font-size: 1.1em;
-            color: #666;
+            color: #cacaca;
+            margin-top: 5px; /* Reduzi a margem superior */
             margin-bottom: 20px;
         }
 
@@ -154,16 +149,15 @@
             .weather-container {
                 padding: 20px;
             }
+            
             .current-weather {
                 font-size: 3em;
             }
-            .current-weather-icon img {
-                background-color: white; /* Adiciona um fundo branco ao ícone */
-                padding: 5px; /* Adiciona algum espaçamento entre o ícone e o fundo */
-                border-radius: 50%; /* Torna o fundo circular, como o ícone */
-                width: 100px; /* Ajuste o tamanho conforme necessário */
-                height: auto;
-             }
+            .current-weather-icon {
+                font-size: 4em;
+                margin-bottom: 20px; /* Aumentei a margem inferior */
+                color: #ffcc00;
+            }
             .day-forecast {
                 width: 50px;
             }
@@ -193,39 +187,11 @@
         </div>
         <div class="current-weather-icon">
             <!-- Exibir o ícone dinamicamente -->
-            <i class="fas {{ icon_class }}"></i>
+            <img src="https://openweathermap.org/img/wn/{{icon}}@2x.png" alt="Weather Icon">
         </div>
         <div class="weather-details">
             {{clima}}<br>
-            {{day}}, <ion-icon name="chevron-down-sharp"></ion-icon> {{temp_min}}°C / <ion-icon name="chevron-up-sharp"></ion-icon> {{temp_max}}°C
-        </div>
-
-        <div class="forecast-container">
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/sun.png" alt="Sunny">
-                <p>Tue</p>
-                <p>31°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/cloud.png" alt="Cloudy">
-                <p>Wed</p>
-                <p>30°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/partly-cloudy-day.png" alt="Partly Cloudy">
-                <p>Thu</p>
-                <p>33°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/rain.png" alt="Rainy">
-                <p>Fri</p>
-                <p>32°</p>
-            </div>
-            <div class="day-forecast">
-                <img src="https://img.icons8.com/ios/50/000000/cloud.png" alt="Cloudy">
-                <p>Sat</p>
-                <p>33°</p>
-            </div>
+            {{day}} , <ion-icon name="chevron-down-sharp"></ion-icon>{{temp_min}}°C / <ion-icon name="chevron-up-sharp"></ion-icon>{{temp_max}}°C
         </div>
     </div>
 

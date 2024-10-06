@@ -13,6 +13,7 @@ def register():
         email = request.form['user_email']
         telefone = request.form['telefone']
         senha = request.form['senha']
+        region = request.form['region']
 
         # Exibindo os dados recebidos no terminal para fins de debug
         print(f"Registrando novo usuário: {nome_completo}, {nome_usuario}, {email}, {telefone}")
@@ -26,7 +27,8 @@ def register():
                         "User_name": nome_usuario,
                         "Email": email,
                         "Phone": telefone,
-                        "Password": senha  # Armazenar de forma segura usando hashing em uma aplicação real
+                        "Password": senha,
+                        "Region": region
                     }
                 }
             ]
