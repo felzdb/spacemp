@@ -4,17 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Interativo</title>
+    <title>Mapa Interativo com OpenWeather</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map {
             height: 600px;
+        }
+
+        .search-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 
 <body>
     <h1>Mapa Interativo com OpenWeather</h1>
+    <div class="search-container">
+        <input type="text" id="cityInput" placeholder="Digite uma cidade">
+        <button id="searchButton">Buscar Clima</button>
+    </div>
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -24,6 +39,7 @@
             maxZoom: 19,
         }).addTo(map);
 
+<<<<<<< Updated upstream
         // Exemplo de chamada à API para obter o clima em Brasília
         fetch('/weather/{city}')
             .then(response => response.json())
@@ -32,6 +48,37 @@
                 marker.bindPopup(`<b>${data.name}</b><br>${data.weather[0].description}.`);
                 marker.openPopup();
             });
+=======
+        function addMarker(city, lat, lon, weather) {
+            var marker = L.marker([lat, lon]).addTo(map);
+            marker.bindPopup(`<b>${city}</b><br>${weather.description}.`);
+            marker.openPopup();
+        }
+
+        document.getElementById('searchButton').addEventListener('click', function () {
+            var city = document.getElementById('cityInput').value;
+            fetch(`/weather/${city}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Cidade não encontrada');
+                    return response.json();
+                })
+                .then(data => {
+                    // Limpa os marcadores anteriores, se necessário
+                    map.eachLayer(function (layer) {
+                        if (layer instanceof L.Marker) {
+                            map.removeLayer(layer);
+                        }
+                    });
+
+                    // Adiciona um novo marcador
+                    addMarker(data.name, data.coord.lat, data.coord.lon, data.weather[0]);
+                    map.setView([data.coord.lat, data.coord.lon], 8); // Ajusta o centro do mapa
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        });
+>>>>>>> Stashed changes
     </script>
 </body>
 
