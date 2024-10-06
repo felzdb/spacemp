@@ -4,17 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Interativo</title>
+    <title>Mapa Interativo com OpenWeather</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin: 20px 0;
+            color: #333;
+        }
+
         #map {
-            height: 600px;
+            width: 100%;
+            height: 80vh;
+            /* Usando altura percentual para responsividade */
+            max-height: 600px;
+            /* Altura máxima para dispositivos maiores */
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container {
+            position: relative;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            width: 300px;
+            max-width: 80%;
+            /* Limita a largura em dispositivos menores */
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            input[type="text"] {
+                width: 70%;
+                /* Ajusta a largura em telas menores */
+            }
         }
     </style>
 </head>
 
 <body>
     <h1>Mapa Interativo com OpenWeather</h1>
+    <div class="search-container">
+        <input type="text" id="cityInput" placeholder="Digite uma cidade">
+        <button id="searchButton">Buscar Clima</button>
+    </div>
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -24,14 +88,35 @@
             maxZoom: 19,
         }).addTo(map);
 
-        // Exemplo de chamada à API para obter o clima em Brasília
-        fetch('/weather/{city}')
-            .then(response => response.json())
-            .then(data => {
-                var marker = L.marker([data.coord.lat, data.coord.lon]).addTo(map);
-                marker.bindPopup(`<b>${data.name}</b><br>${data.weather[0].description}.`);
-                marker.openPopup();
-            });
+        function addMarker(city, lat, lon, weather) {
+            var marker = L.marker([lat, lon]).addTo(map);
+            marker.bindPopup(`<b>${city}</b><br>${weather.description}.`);
+            marker.openPopup();
+        }
+
+        document.getElementById('searchButton').addEventListener('click', function () {
+            var city = document.getElementById('cityInput').value;
+            fetch(`/weather/${city}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Cidade não encontrada');
+                    return response.json();
+                })
+                .then(data => {
+                    // Limpa os marcadores anteriores, se necessário
+                    map.eachLayer(function (layer) {
+                        if (layer instanceof L.Marker) {
+                            map.removeLayer(layer);
+                        }
+                    });
+
+                    // Adiciona um novo marcador
+                    addMarker(data.name, data.coord.lat, data.coord.lon, data.weather[0]);
+                    map.setView([data.coord.lat, data.coord.lon], 8); // Ajusta o centro do mapa
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        });
     </script>
 </body>
 
