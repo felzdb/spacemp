@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo da NASA</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #0056b3;
+        }
+
+        #map {
+            height: 80vh;
+            /* Altura do mapa em relação à altura da viewport */
+            width: 100%;
+            /* Largura total */
+            border: 2px solid #0056b3;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+        }
+
+        .leaflet-popup-content {
+            text-align: center;
+        }
+
+        img {
+            border-radius: 4px;
+            max-width: 100%;
+        }
+
+        .popup-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Mapa Interativo da NASA</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Inicializa o mapa
+        var map = L.map('map').setView([20, 0], 2);
+
+        // Adiciona a camada do mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Função para adicionar uma imagem da NASA
+        function addNasaImage(lat, lon, imageUrl) {
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup('<div class="popup-header">Imagem da NASA</div><img src="' + imageUrl + '" />')
+                .openPopup();
+        }
+
+        // Função para buscar dados da NASA
+        async function fetchNasaData() {
+            const response = await fetch('https://api.nasa.gov/planetary/earth/assets?api_key=sua_chave_api_aqui&lon=-100.0&lat=40.0&date=2020-01-01');
+            const data = await response.json();
+
+            data.results.forEach(item => {
+                addNasaImage(item.latitude, item.longitude, item.url);
+            });
+        }
+
+        // Chama a função para buscar os dados
+        fetchNasaData();
+    </script>
+</body>
+
+</html>
