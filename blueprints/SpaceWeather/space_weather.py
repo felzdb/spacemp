@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template
 import requests
 
-space_weather_bp = Blueprint('space_weather', __name__)
+space_weather_bp = Blueprint('space_weather', __name__, template_folder='Templates')
 
 # Defina sua chave de API aqui
 API_KEY = 'krtHTpfgfbNy56GfF1n8CBgCdL5Okfg9Pv726TLT'  # Substitua pela sua chave de API
