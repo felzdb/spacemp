@@ -91,7 +91,7 @@
         }
 
         .weather-container {
-            background-color: white;
+            background-color: black;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
@@ -106,24 +106,19 @@
         .weather-container h2 {
             margin-bottom: 30px;
             font-size: 2em;
-            color: #333;
+            color: #ffffff;
         }
 
         .current-weather {
             font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .current-weather-icon {
-            font-size: 4em;
-            margin-bottom: 10px;
-            color: #ffcc00;
+            margin-bottom: 5px;
+            color: #cacaca;
         }
 
         .weather-details {
             font-size: 1.1em;
-            color: #666;
+            color: #cacaca;
+            margin-top: 5px; /* Reduzi a margem superior */
             margin-bottom: 20px;
         }
 
@@ -154,16 +149,15 @@
             .weather-container {
                 padding: 20px;
             }
+            
             .current-weather {
                 font-size: 3em;
             }
-            .current-weather-icon img {
-                background-color: white; /* Adiciona um fundo branco ao ícone */
-                padding: 5px; /* Adiciona algum espaçamento entre o ícone e o fundo */
-                border-radius: 50%; /* Torna o fundo circular, como o ícone */
-                width: 100px; /* Ajuste o tamanho conforme necessário */
-                height: auto;
-             }
+            .current-weather-icon {
+                font-size: 4em;
+                margin-bottom: 20px; /* Aumentei a margem inferior */
+                color: #ffcc00;
+            }
             .day-forecast {
                 width: 50px;
             }
