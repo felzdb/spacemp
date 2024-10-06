@@ -1,6 +1,6 @@
 import requests
 import datetime
-from flask import Blueprint, render_template, redirect, session, flash
+from flask import Blueprint, render_template, redirect, session, flash, url_for
 
 dash_temp_bp = Blueprint("dash_temp_menu", __name__, template_folder="templates")
 
